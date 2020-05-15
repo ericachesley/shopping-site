@@ -24,7 +24,7 @@
                         My Melon Cart
                     </a>
                 </li>
-                {% if not session["logged_in_customer_email"] %}
+                {% if not session.get("logged_in_customer_email") %}
                 <li><a href="/login">Log In</a></li>
                 {% else %}
                 <li><a href="/logout">Log Out</a></li>

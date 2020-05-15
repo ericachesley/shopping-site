@@ -167,6 +167,13 @@ def process_login():
         return redirect("/login")
 
 
+@app.route("/logout")
+def process_logout():
+    session.pop('logged_in_customer_email')
+    flash("Logout successful.")
+    return redirect("/melons")
+
+
 @app.route("/checkout")
 def checkout():
     """Checkout customer, process payment, and ship melons."""
