@@ -26,6 +26,7 @@ class Customer(object):
         return hash(password) == self.hashed_password
 
 
+
 def read_customers_from_file(filepath):
     customers = {}
 

@@ -137,7 +137,7 @@ def process_login():
     # TODO: Need to implement this!
 
     # The logic here should be something like:
-    #
+    
     # - get user-provided name and password from request.form
     # - use customers.get_by_email() to retrieve corresponding Customer
     #   object (if any)
