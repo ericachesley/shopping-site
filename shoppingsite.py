@@ -6,15 +6,16 @@ put melons in a shopping cart.
 Authors: Joel Burton, Christian Fernandez, Meggie Mahnken, Katie Byers.
 """
 
-from flask import Flask, render_template, redirect, flash, session
+from flask import Flask, render_template, redirect, flash, session, request
 import jinja2
 
 import melons
+import customers
 
 app = Flask(__name__)
 
 # A secret key is needed to use Flask sessioning features
-app.secret_key = 'this-should-be-something-unguessable'
+app.secret_key = 'hfdsfhj4thdfnkw3345yklnm3'
 
 # Normally, if you refer to an undefined variable in a Jinja template,
 # Jinja silently ignores this. This makes debugging difficult, so we'll
@@ -147,7 +148,23 @@ def process_login():
     # - if they don't, flash a failure message and redirect back to "/login"
     # - do the same if a Customer with that email doesn't exist
 
-    return "Oops! This needs to be implemented"
+    email = request.form.get('email')
+    print(email, customers.customers)
+    password = request.form.get('password')
+
+    if email not in customers.customers:
+        flash("No customer with that email found.")
+        return redirect('/login')
+
+    user = customers.get_by_email(email)
+
+    if user.password == password:
+        session['logged_in_customer_email'] = email
+        flash("Login successful!")
+        return redirect("/melons")
+    else:
+        flash("Incorrect password")
+        return redirect("/login")
 
 
 @app.route("/checkout")
