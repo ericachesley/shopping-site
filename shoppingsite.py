@@ -158,7 +158,7 @@ def process_login():
 
     user = customers.get_by_email(email)
 
-    if user.password == password:
+    if user.is_correct_password(password):
         session['logged_in_customer_email'] = email
         flash("Login successful!")
         return redirect("/melons")
